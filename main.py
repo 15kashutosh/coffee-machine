@@ -1,4 +1,12 @@
+import json
 
+MENU = json.load(open("MENU.json"))
+
+# with open("MENU.json") as anyname:
+#     MENU = json.load(anyname)
+
+print(MENU)
+#print(MENU)
 def is_resource_sufficient(order_ingredients):
     """Returns True when order can be made, False if ingredients are insufficient"""
     for item in order_ingredients:
@@ -20,7 +28,7 @@ def process_coins():
 
 
 def is_transaction_successful(money_received, drink_cost):
-    """Return True when the payment is successful, or False if money is insuffient."""
+    """Return True when the payment is successful, or False if money is insufficient."""
     if money_received >= drink_cost:
         change = round(money_received - drink_cost, 2)
         print(f"Here is ${change} in change.")
@@ -31,6 +39,7 @@ def is_transaction_successful(money_received, drink_cost):
     else:
         print("Sorry that's not enough money. Money refunded.")
         return False
+
 
 def make_coffee(drink_name, order_ingredients):
     """Deduct the required ingredients from the resources."""
@@ -47,31 +56,6 @@ if __name__ == '__main__':
         "coffee": 100,
     }
 
-    MENU = {
-        "espresso": {
-            "ingredients": {
-                "water": 50,
-                "coffee": 18,
-            },
-            "cost": 1.5,
-        },
-        "latte": {
-            "ingredients": {
-                "water": 200,
-                "milk": 150,
-                "coffee": 24,
-            },
-            "cost": 2.5,
-        },
-        "cappuccino": {
-            "ingredients": {
-                "water": 250,
-                "milk": 100,
-                "coffee": 24,
-            },
-            "cost": 3.0,
-        }
-    }
 
     is_on = True
 
@@ -90,4 +74,3 @@ if __name__ == '__main__':
                 payment = process_coins()
                 if is_transaction_successful(payment, drink['cost']):
                     make_coffee(choice, drink["ingredients"])
-
